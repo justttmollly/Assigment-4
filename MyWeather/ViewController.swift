@@ -1,16 +1,7 @@
-//
-//  ViewController.swift
-//  MyWeather
-//
-//  Created by Afraz Siddiqui on 3/25/20.
-//  Copyright © 2020 ASN GROUP LLC. All rights reserved.
-//
-
 import UIKit
 import CoreLocation
 
-// custom cell: collection view
-// API / request to get the data
+
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
 
@@ -25,7 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Register 2 cells
+    
         table.register(HourlyTableViewCell.nib(), forCellReuseIdentifier: HourlyTableViewCell.identifier)
         table.register(WeatherTableViewCell.nib(), forCellReuseIdentifier: WeatherTableViewCell.identifier)
 
@@ -42,7 +33,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         setupLocation()
     }
 
-    // Location
 
     func setupLocation() {
         locationManager.delegate = self
@@ -69,13 +59,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { data, response, error in
 
-            // Validation
             guard let data = data, error == nil else {
                 print("something went wrong")
                 return
             }
 
-            // Convert data to models/some object
 
             var json: WeatherResponse?
             do {
@@ -98,7 +86,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             self.hourlyModels = result.hourly.data
 
-            // Update user interface
+  
             DispatchQueue.main.async {
                 self.table.reloadData()
 
@@ -139,7 +127,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
 
-    // Table
+
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -162,7 +150,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return cell
         }
 
-        // Continue
+    
         let cell = tableView.dequeueReusableCell(withIdentifier: WeatherTableViewCell.identifier, for: indexPath) as! WeatherTableViewCell
         cell.configure(with: models[indexPath.row])
         cell.backgroundColor = UIColor(red: 52/255.0, green: 109/255.0, blue: 179/255.0, alpha: 1.0)

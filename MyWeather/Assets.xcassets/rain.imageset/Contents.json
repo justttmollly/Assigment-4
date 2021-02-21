@@ -2,10 +2,10 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "rain.png",
       "scale" : "1x"
     },
     {
+      "filename" : "rain.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -15,7 +15,7 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
